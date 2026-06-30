@@ -1,0 +1,27 @@
+# 04-allow-egress-dns.yaml
+# When you deny all egress, pods can't resolve DNS (service names won't work)
+# This policy allows DNS traffic (port 53) to ANY destination
+# This is required for service discovery to work in Kubernetes
+#
+# Apply BEFORE deny-all, or right after — both work because policies are additive
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-dns
+  namespace: devsecops-demo
+spec:
+  # Apply to ALL pods in namespace
+  podSelector: {}
+
+  policyTypes:
+    - Egress
+
+  egress:
+    # Allow DNS queries to any destination on port 53
+    # (CoreDNS could be in kube-system or any namespace depending on cluster setup)
+    - ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
