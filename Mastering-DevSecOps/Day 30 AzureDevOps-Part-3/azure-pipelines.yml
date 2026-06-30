@@ -161,7 +161,7 @@ stages:
               inlineScript: |
                 echo "Using hardcoded key for testing..."
                 az storage blob upload-batch --account-name saikiransecops \
-                  --account-key "yDO5lCm7ud6VRLjHkjikceT3ysgEYeDUn5SRC8jIU3PcNe/ZIocl+90BfRAUl3QkF6CLfARX8IRA+AStA/NlOA==" \
+                  --account-key "<mention-your-hardcoded-key-here>" \
                   --destination artifacts --source /artifacts/
             displayName: "Azure Upload artifacts with hardcoded key"
             continueOnError: true
