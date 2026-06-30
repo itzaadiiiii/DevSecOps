@@ -161,7 +161,19 @@ stages:
               inlineScript: |
                 echo "Using hardcoded key for testing..."
                 az storage blob upload-batch --account-name saikiransecops \
-                  --account-key "<mention-your-hardcoded-key-here>" \
+                  # --account-key "<mention-your-hardcoded-key-here>" \      #Commented because it blocks push to main as its a secret
+                    Type: AWS::EC2::SecurityGroup
+                    Properties:
+                      GroupName: 
+                      GroupDescription: 
+                      VpcId:
+                      SecurityGroupIngress:
+                        - Security Group Rule
+                      SecurityGroupEgress:
+                        - Security Group Rule
+                      Tags:
+                        - Key:
+                          Value:
                   --destination artifacts --source /artifacts/
             displayName: "Azure Upload artifacts with hardcoded key"
             continueOnError: true
